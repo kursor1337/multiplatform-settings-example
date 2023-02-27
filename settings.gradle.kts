@@ -21,6 +21,8 @@ dependencyResolutionManagement {
                 "extensions-compose-jetpack"
             ).versionRef("decompose")
 
+            library("essenty-lifecycle", "com.arkivanov.essenty", "lifecycle").version("1.0.0")
+
             version("koin", "3.3.0")
             library("koin-core", "io.insert-koin", "koin-core").versionRef("koin")
 

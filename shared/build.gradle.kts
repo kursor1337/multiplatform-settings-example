@@ -19,6 +19,8 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
+            export(libs.decompose.core)
+            export(libs.essenty.lifecycle)
         }
     }
 
@@ -47,6 +49,9 @@ kotlin {
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
+            dependencies {
+                api(libs.decompose.core)
+            }
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
