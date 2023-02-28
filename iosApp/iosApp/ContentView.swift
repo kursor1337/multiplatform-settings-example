@@ -8,6 +8,7 @@ class Content : ObservableObject {
 
 struct ContentView: View {
     
+    
     private let componentHolder: ComponentHolder = ComponentHolder {
             IosComponentFactory
                 .shared
@@ -18,27 +19,42 @@ struct ContentView: View {
 	let greet = "Greeting().greet()"
     
     @ObservedObject
-    var content = Content()
+    var messageState: State<NSString>
+    @ObservedObject
+    var textState: State<NSString>
+    
     
     init() {
-        StateFlowUtilsKt
-            .wrap(componentHolder.component.messageState)
-            .watch { (it: AnyObject?) in
-                let message = it as! String
-                content.messageState = message
-                
-        }
-        StateFlowUtilsKt
-            .wrap(componentHolder.component.textFromSettingsState)
-            .watch { (it: AnyObject?) in
-                let text = it as! String
-                content.textState = text
-            }
+        messageState = State(componentHolder.component.messageState)
+        textState = State(componentHolder.component.textFromSettingsState)
     }
 
 	var body: some View {
-        Text(content.messageState)
-        TextField(title: StringProtocol(""), text: $content.messageState)
+        let text = textState.value as String
+        Text(text)
+        TextField(
+            "",
+            text: Binding(
+                get: {
+                    messageState.value as String
+                },
+                set: { message in
+                    componentHolder.component.onMessageChanged(text: message as String)
+                }
+            )
+        )
+        Button("Save to regular settings") {
+            componentHolder.component.onSaveToRegularClick()
+        }
+        Button("Save to encrypted settings") {
+            componentHolder.component.onSaveToEncryptedClick()
+        }
+        Button("Get from regular settings") {
+            componentHolder.component.onGetFromRegularClick()
+        }
+        Button("Get from encrypted settings") {
+            componentHolder.component.onGetFromEncryptedClick()
+        }
 	}
 }
 
