@@ -1,6 +1,7 @@
 package com.kursor.myapplication.storage.ui
 
 import com.arkivanov.decompose.ComponentContext
+import com.kursor.myapplication.storage.CMutableStateFlow
 import com.kursor.myapplication.storage.data.MessageStorage
 import com.kursor.myapplication.storage.domain.Message
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,9 +11,9 @@ class RealMessageComponent(
     private val messageStorage: MessageStorage
 ) : ComponentContext by componentContext, MessageComponent {
 
-    override val messageState: MutableStateFlow<String> = MutableStateFlow("")
+    override val messageState: CMutableStateFlow<String> = CMutableStateFlow("")
 
-    override val textFromSettingsState: MutableStateFlow<String> = MutableStateFlow("")
+    override val textFromSettingsState: CMutableStateFlow<String> = CMutableStateFlow("")
 
     override fun onSaveToRegularClick() {
         messageStorage.saveMessageToRegularSettings(Message(messageState.value))

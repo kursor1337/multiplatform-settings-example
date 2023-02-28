@@ -1,11 +1,11 @@
 package com.kursor.myapplication.storage.ui
 
-import kotlinx.coroutines.flow.StateFlow
+import com.kursor.myapplication.storage.CStateFlow
 
 interface MessageComponent {
 
-    val messageState: StateFlow<String>
-    val textFromSettingsState: StateFlow<String>
+    val messageState: CStateFlow<String>
+    val textFromSettingsState: CStateFlow<String>
 
     fun onSaveToRegularClick()
     fun onSaveToEncryptedClick()
