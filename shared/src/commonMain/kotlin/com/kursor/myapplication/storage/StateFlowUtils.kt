@@ -9,7 +9,7 @@ interface Cancellable {
     fun cancel()
 }
 
-open class CStateFlow<T>(origin: StateFlow<T>) : StateFlow<T> by origin {
+open class CStateFlow<T : Any>(origin: StateFlow<T>) : StateFlow<T> by origin {
     fun collect(block: (T) -> Unit): Cancellable {
         val coroutineScope = CoroutineScope(Dispatchers.Main.immediate)
 
@@ -25,7 +25,7 @@ open class CStateFlow<T>(origin: StateFlow<T>) : StateFlow<T> by origin {
     }
 }
 
-class CMutableStateFlow<T>(
+class CMutableStateFlow<T : Any>(
     private val origin: MutableStateFlow<T>
 ) : CStateFlow<T>(origin), MutableStateFlow<T> by origin {
 

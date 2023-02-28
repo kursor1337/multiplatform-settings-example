@@ -16,22 +16,26 @@ class RealMessageComponent(
     override val textFromSettingsState: CMutableStateFlow<String> = CMutableStateFlow("")
 
     override fun onSaveToRegularClick() {
+        println(":onSaveToRegularClick")
         messageStorage.saveMessageToRegularSettings(Message(messageState.value))
     }
 
     override fun onSaveToEncryptedClick() {
+        println(":onSaveToEncryptedClick")
         messageStorage.saveMessageToEncryptedSettings(Message(messageState.value))
     }
 
     override fun onGetFromRegularClick() {
         messageStorage.getMessageFromRegularSettings()?.let {
             textFromSettingsState.value = it.text
+            println(":onGetFromRegularClick ${it.text}")
         }
     }
 
     override fun onGetFromEncryptedClick() {
         messageStorage.getMessageFromEncryptedSettings()?.let {
             textFromSettingsState.value = it.text
+            println(":onGetFromEncryptedClick ${it.text}")
         }
     }
 
