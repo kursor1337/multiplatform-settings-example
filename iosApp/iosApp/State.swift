@@ -11,17 +11,26 @@ import shared
 
 class State<T : AnyObject> : ObservableObject {
     
-    private let stateFlow: CStateFlow<T>
-    
     @Published
     var value: T
-
+    
+    var cancellable: Cancellable?
+    
     init(_ stateFlow: CStateFlow<T>) {
-        self.stateFlow = stateFlow
         self.value = stateFlow.value
         
-        let collector: (T) -> Void = { [weak self] value in self?.value = value }
-        self.stateFlow.collect(block: collector)
+        cancellable = FlowWrapper<T>(flow: stateFlow).collect(
+            consumer: { value in
+                if let value = value {
+                    self.value = value
+                    print("onCollect: \(value)")
+                }
+            }
+        )
+    }
+    
+    deinit {
+        self.cancellable?.cancel()
     }
     
 }

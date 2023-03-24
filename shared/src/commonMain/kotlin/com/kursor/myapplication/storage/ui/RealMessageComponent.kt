@@ -40,6 +40,7 @@ class RealMessageComponent(
     }
 
     override fun onMessageChanged(text: String) {
+        println(":onMessageChanged $text")
         messageState.value = text
     }
 

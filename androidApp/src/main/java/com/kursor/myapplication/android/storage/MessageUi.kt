@@ -15,6 +15,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.kursor.myapplication.android.MyApplicationTheme
+import com.kursor.myapplication.storage.CMutableStateFlow
+import com.kursor.myapplication.storage.CStateFlow
 import com.kursor.myapplication.storage.ui.MessageComponent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -87,8 +89,8 @@ fun MessageUiPreview() {
 
 class FakeMessageComponent : MessageComponent {
 
-    override val messageState: StateFlow<String> = MutableStateFlow("duck")
-    override val textFromSettingsState: StateFlow<String> = MutableStateFlow("duck")
+    override val messageState: CStateFlow<String> = CMutableStateFlow("duck")
+    override val textFromSettingsState: CStateFlow<String> = CMutableStateFlow("duck")
 
     override fun onSaveToRegularClick() = Unit
     override fun onSaveToEncryptedClick() = Unit

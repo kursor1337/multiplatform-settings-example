@@ -1,10 +1,6 @@
 import SwiftUI
 import shared
 
-class Content : ObservableObject {
-    @Published var messageState: String = ""
-    @Published var textState: String = ""
-}
 
 struct ContentView: View {
     
@@ -16,7 +12,6 @@ struct ContentView: View {
                     componentContext: $0
                 )
         }
-	let greet = "Greeting().greet()"
     
     @ObservedObject
     var messageState: State<NSString>
@@ -30,8 +25,7 @@ struct ContentView: View {
     }
 
 	var body: some View {
-        let text = textState.value as String
-        Text(text)
+        Text(textState.value as String)
         TextField(
             "",
             text: Binding(
@@ -51,6 +45,7 @@ struct ContentView: View {
         }
         Button("Get from regular settings") {
             componentHolder.component.onGetFromRegularClick()
+            print(textState.value as String)
         }
         Button("Get from encrypted settings") {
             componentHolder.component.onGetFromEncryptedClick()
