@@ -31,7 +31,6 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.multiplatform.settings.core)
                 implementation(libs.coroutines)
-                implementation(libs.multiplatform.settings.noarg)
             }
         }
         val commonTest by getting {

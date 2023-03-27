@@ -45,7 +45,6 @@ struct ContentView: View {
         }
         Button("Get from regular settings") {
             componentHolder.component.onGetFromRegularClick()
-            print(textState.value as String)
         }
         Button("Get from encrypted settings") {
             componentHolder.component.onGetFromEncryptedClick()

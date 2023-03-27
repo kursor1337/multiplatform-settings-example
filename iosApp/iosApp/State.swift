@@ -23,7 +23,6 @@ class State<T : AnyObject> : ObservableObject {
             consumer: { value in
                 if let value = value {
                     self.value = value
-                    print("onCollect: \(value)")
                 }
             }
         )

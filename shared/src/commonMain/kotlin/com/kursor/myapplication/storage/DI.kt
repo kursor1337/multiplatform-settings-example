@@ -14,7 +14,7 @@ import org.koin.dsl.module
 
 val storageModule = module {
     single<MessageStorage> { MessageStorageImpl(
-        regularSettings = Settings(),
+        regularSettings = createSettings("regular_message_storage"),
         encryptedSettings = createSettings(
             name = "encrypted_message_storage",
             encrypted = true

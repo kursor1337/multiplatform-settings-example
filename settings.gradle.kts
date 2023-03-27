@@ -33,12 +33,6 @@ dependencyResolutionManagement {
                 "multiplatform-settings"
             ).version("1.0.0")
 
-            library(
-                "multiplatform-settings-noarg",
-                "com.russhwolf",
-                "multiplatform-settings-no-arg"
-            ).version("1.0.0")
-
             // ---ANDROID---
 
             // Compose
